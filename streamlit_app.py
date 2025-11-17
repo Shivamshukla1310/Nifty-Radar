@@ -120,15 +120,35 @@ if st.button("🚀 Fetch & Analyze"):
         # ------------------------- TAB 2: EMA Trends -------------------------
         with tab2:
             st.subheader("📈 Exponential Moving Averages (Trend Visualization)")
+
+            # Ensure consistent datetime format for plotting and potential tooltip usage
             df['Date'] = pd.to_datetime(df['Date'])
             df['Date_str'] = df['Date'].dt.strftime('%Y-%m-%d')
 
+            # Initialize chart for EMAs + price overlay
             ema_fig = go.Figure()
-            ema_fig.add_trace(go.Scatter(x=df['Date'], y=df['Close'], name='Close', line=dict(color='gold', width=2)))
-            ema_colors = {'EMA20': 'green', 'EMA50': 'red', 'EMA100': 'purple', 'EMA200': 'blue'}
-            for col, color in ema_colors.items():
-                ema_fig.add_trace(go.Scatter(x=df['Date'], y=df[col], name=col, line=dict(color=color)))
 
+            # Baseline reference curve: actual closing price
+            ema_fig.add_trace(go.Scatter(
+                x=df['Date'],
+                y=df['Close'],
+                name='Close',
+                line=dict(color='gold', width=2) # Brighter + thicker to visually anchor the trend
+            ))
+
+            # Color mapping for EMA lines — chosen to differentiate short vs long-term trends
+            ema_colors = {'EMA20': 'green', 'EMA50': 'red', 'EMA100': 'purple', 'EMA200': 'blue'}
+
+            # Add each EMA line to the chart (loop avoids repetitive code)
+            for col, color in ema_colors.items():
+                ema_fig.add_trace(go.Scatter(
+                    x=df['Date'],
+                    y=df[col],
+                    name=col,
+                    line=dict(color=color)
+                ))
+
+            # Layout tweaks for readability + dark mode consistency
             ema_fig.update_layout(
                 template="plotly_dark",
                 height=500,
@@ -136,6 +156,8 @@ if st.button("🚀 Fetch & Analyze"):
                 yaxis_title="Price",
                 legend_title="Indicators"
             )
+
+            # Render final plot
             st.plotly_chart(ema_fig, use_container_width=True)
 
         # ------------------------- TAB 3: Predictions -------------------------
