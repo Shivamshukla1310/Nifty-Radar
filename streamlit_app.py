@@ -164,27 +164,40 @@ if st.button("🚀 Fetch & Analyze"):
         with tab3:
             st.subheader("🤖 Model Predictions vs Actual Prices")
 
+            # Use only the Close column for training/prediction (model assumes univariate time series)
             close = df[['Close']].reset_index(drop=True)
+            
+            # Hard-coded train/test split (70/30). Not time-shuffled → preserves chronological integrity.
             split = int(len(close) * 0.7)
             train = close[:split]
             test = close[split:]
+            
+            # Normalization required because the model was trained on MinMax-scaled values, not raw prices
             scaler = MinMaxScaler()
             train_scaled = scaler.fit_transform(train)
 
-            # Prepare test set
+            # Construct prediction input by taking the last 100 training points + full test period
+            # Using past context is critical; otherwise the model has no previous state.
             past_100 = train.tail(100).reset_index(drop=True)
             final_df = pd.concat([past_100, test.reset_index(drop=True)], ignore_index=True)
+            
+            # Scale full inference window using the same scaler → avoids distribution mismatch
             input_data = scaler.transform(final_df)
 
+            # Sliding window creation to reproduce input shape expected by LSTM/CNN model (100 timesteps)
             x_test = []
             for i in range(100, input_data.shape[0]):
                 x_test.append(input_data[i-100:i])
             x_test = np.array(x_test)
 
-            # Predict
+            # Generate predictions — model outputs scaled values so they must be inverted to real prices
             preds = model.predict(x_test)
             preds = scaler.inverse_transform(preds).flatten()
+            
+            # Ground truth values aligned to the same prediction horizon (exclude first 100 warm-up rows)
             actual = scaler.inverse_transform(input_data[100:].reshape(-1,1)).flatten()
+            
+            # Keep consistent date formatting for potential labeling or advanced hover display
             df['Date'] = pd.to_datetime(df['Date'])
             df['Date_str'] = df['Date'].dt.strftime('%Y-%m-%d')
 
