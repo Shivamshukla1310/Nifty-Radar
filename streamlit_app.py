@@ -243,7 +243,12 @@ if st.button("🚀 Fetch & Analyze"):
             st.caption("Upcoming: AI-based Sentiment Analysis, Risk Scoring, and News Feed Integration 📡")
 
         # ------------------------- CSV DOWNLOAD -------------------------
+        # Convert the processed dataframe to downloadable CSV bytes.
+        # UTF-8 ensures compatibility across Excel, Google Sheets, and non-ASCII tickers.
         csv = df.to_csv(index=False).encode('utf-8')
+        
+        # Streamlit download button for exporting the cleaned + feature-augmented dataset.
+        # Naming file by ticker improves user clarity and avoids overwriting random files.
         st.download_button(
             label="💾 Download dataset (CSV)",
             data=csv,
