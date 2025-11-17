@@ -44,25 +44,29 @@ def load_my_model(path="stock_dl_model.h5"):
 model = load_my_model()
 
 # ------------------------- MAIN LOGIC -------------------------
+# Triggere data fetch and analysis only when user clicks (prevents automatic API calls and wasted compute)
 if st.button("🚀 Fetch & Analyze"):
+
+    # Shown a temporary loading indicator while pulling historical price data from Yahoo Finance
     with st.spinner("📥 Downloading stock data..."):
         df = yf.download(symbol, start=start_date, end=end_date)
 
+    # Defensive check - API may return empty results for invalid tickers, holidays, or bad date ranges
     if df.empty:
         st.error("No data found for this ticker & date range.")
     else:
         st.success(f"✅ Data successfully fetched for **{symbol}** ({len(df)} days).")
 
-        # Ensure datetime index
+        # Convert index to a useable column and enforce proper date type + ordering for plotting + modeling
         df.reset_index(inplace=True)
         df['Date'] = pd.to_datetime(df['Date'])
         df.sort_values('Date', inplace=True)
 
-        # Compute EMAs
+        # Calculate multiple Exponential Moving Averages (used trend indicators at different horizons
         for span in [20, 50, 100, 200]:
             df[f'EMA{span}'] = df['Close'].ewm(span=span, adjust=False).mean()
 
-        # Layout tabs
+        # Separate UI sections for clarity - avoid cluttered single-page experience
         tab1, tab2, tab3, tab4 = st.tabs(["📊 Overview", "💹 EMAs", "🤖 Predictions", "📈 Insights"])
 
         # ------------------------- TAB 1: Overview -------------------------
