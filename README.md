@@ -1,221 +1,155 @@
-🌟 Stock Market Trend Predictor — Streamlit Web Application
+<h1 align="center">Stock Market Trend Predictor</h1>
+<p align="center">
+  Time-Series Analysis • Deep Learning • Interactive Financial Visualization
+</p>
 
-An intelligent, interactive web application that predicts stock market trends using Deep Learning (LSTM), technical indicators, and live market data from Yahoo Finance.
-Built using Streamlit, Plotly, TensorFlow, and yfinance, this project helps users analyze market patterns and visualize candlesticks, EMAs, volumes, and ML-based predictions.
+---
 
-🔗 Live Demo
+### 📘 Overview
 
-👉 (https://stock-market-trend-predictor-trbsdvd5qtku3msgn9uqqo.streamlit.app/)
+This project is an end-to-end **Stock Market Trend Predictor** built using Streamlit, TensorFlow, and Yahoo Finance data.  
+It analyzes historical stock prices, computes technical indicators, and predicts future stock trends using a trained LSTM model.
 
+The application provides a clean, interactive dashboard where users can view:
 
-🖼️ Screenshots
+- Historical candlestick patterns  
+- Volume analysis  
+- EMA trends (20, 50, 100, 200)  
+- Predicted vs Actual price comparison  
+- Next-day stock trend insights  
 
-Add your website images here (PC & Mobile view):
+This project demonstrates real-world use of **ETL, Time-Series Forecasting, Feature Engineering, Deep Learning, and Data Visualization**.
 
-<img width="1360" height="623" alt="Screenshot 2025-11-16 223939" src="https://github.com/user-attachments/assets/4e10b753-b1a7-4b2e-bcc1-d36cfa675d28" />
-<img width="1362" height="623" alt="Screenshot 2025-11-16 160629" src="https://github.com/user-attachments/assets/f13e1fc2-4a1e-4c9d-9e21-dafccc468673" />
-<img width="958" height="452" alt="Screenshot 2025-11-16 160351" src="https://github.com/user-attachments/assets/99d4f47b-2170-44a2-b3d1-9adaac175bdf" />
-![WhatsApp Image 2025-11-16 at 16 08 15_0140b38c](https://github.com/user-attachments/assets/9c962eb5-f3b4-4c86-82b3-52f29e5dab3e)
-![WhatsApp Image 2025-11-16 at 16 08 19_4f7b6a36](https://github.com/user-attachments/assets/22ff9d39-0134-4797-9cc7-105f4b7bfee4)
+---
 
+### 🔗 Live Demo
 
+https://stock-market-trend-predictor-trbsdvd5qtku3msgn9uqqo.streamlit.app/
 
+---
 
+### 🖼️ Screenshots
 
+*(Add your images inside the repository and replace these paths accordingly)*
 
-	
-📊 Charts
+<p align="center">
+  <img src=""C:\Users\Hp\OneDrive\Pictures\Screenshots\Screenshot 2025-11-16 223939.png"" width="70%" />
+</p>
 
-You can add your candlestick, EMA, volume, prediction charts here:
+<p align="center">
+  <img src=""C:\Users\Hp\OneDrive\Pictures\Screenshots\Screenshot 2025-11-16 160629.png"" width="40%" />
+</p>
 
-Candlestick Chart
+---
 
+### 🔍 Features
 
+- Fetches **live & historical market data**  
+- Visualizes candlestick charts using Plotly  
+- Computes technical indicators (EMA20/50/100/200)  
+- LSTM Deep Learning model for **next-day price prediction**  
+- Trend classification: *Uptrend / Downtrend / Neutral*  
+- Downloadable processed dataset  
+- Clean tab-based UI built with Streamlit  
 
-Volume Chart
+---
 
-EMA Trend Chart
+### 🧠 Machine Learning Scope
 
-Prediction vs Actual Chart
+This project uses Deep Learning for **time-series forecasting**.
 
-🚀 Features
-📥 Real-Time Stock Data Fetching
+#### Covered ML Concepts:
+- Data scaling using MinMaxScaler  
+- Converting time series into supervised learning using **sliding windows (100 timesteps)**  
+- Training an LSTM model for sequence prediction  
+- Inference pipeline with inverse transformation  
+- Comparing actual vs predicted closing prices  
 
-Pulls live & historical data using Yahoo Finance API
+#### ETL Pipeline:
+1. **Extract** — Data pulled from Yahoo Finance  
+2. **Transform** — Cleaning, EMA feature engineering, scaling  
+3. **Load / Predict** — Feeding sequences to LSTM model + visualization  
 
-Supports Indian (NSE/BSE) and global tickers like:
+---
 
-POWERGRID.NS, INFY.NS, AAPL, TSLA
+### 🧱 Tech Stack
 
-📊 Interactive Financial Charts
+**Frontend / UI**
+- Streamlit
+- Plotly
 
-Candlestick chart
+**Backend / Logic**
+- Python  
+- yfinance  
+- pandas  
+- numpy  
+- scikit-learn  
 
-Volume bars (dual-axis)
+**Machine Learning**
+- TensorFlow / Keras (LSTM Model)
+- MinMaxScaler preprocessing  
+- Time-Series forecasting pipeline  
 
-EMA20, EMA50, EMA100, EMA200 trends
+**Deployment**
+- Streamlit Cloud
 
-Zoom, hover, drag enabled via Plotly
+---
 
-🤖 ML-Based Stock Prediction
-
-LSTM model predicts next-day price trend
-
-Compares actual vs predicted
-
-Shows % predicted change
-
-Trend insight: Uptrend / Downtrend / Neutral
-
-💾 Dataset Export
-
-Download processed dataset (features + indicators) as CSV
-
-🧠 Optimized App Experience
-
-Cached ML model loading
-
-Clean sidebar inputs
-
-Tab-based sections for better UX
-
-🧱 Project Structure
-📦 Stock-Market-Trend-Predictor
+### 📂 Project Structure
+Stock-Market-Trend-Predictor/
 │
-├── streamlit_app.py          # Main Streamlit app
-├── stock_dl_model.h5         # Trained deep learning model
-├── requirements.txt          # Dependencies
-├── README.md                 # Documentation
-└── ...
+├── streamlit_app.py # Main Streamlit application
+├── stock_dl_model.h5 # Trained LSTM model
+├── requirements.txt # Dependencies
+├── assets/ # Screenshots and media
+└── README.md # Documentation
 
-🛠️ Tech Stack
-Frontend / UI
 
-Streamlit
+---
 
-Plotly
+### ⚙️ Installation
 
-Backend / Logic
-
-Python
-
-yfinance
-
-pandas, numpy
-
-scikit-learn
-
-TensorFlow / Keras
-
-ML Model
-
-LSTM (Long Short-Term Memory neural network)
-
-Trained on historical closing prices
-
-MinMax scaling
-
-Sliding window (100-day sequence)
-
-⚙️ Installation & Setup
-1️⃣ Clone the Repository
+```bash
 git clone https://github.com/YOUR_USERNAME/Stock-Market-Trend-Predictor.git
 cd Stock-Market-Trend-Predictor
-
-2️⃣ Install Requirements
 pip install -r requirements.txt
-
-3️⃣ Run the App
 streamlit run streamlit_app.py
 
-📌 How Predictions Work
-✔ Step 1: Load historical closing prices
-✔ Step 2: Scale using MinMaxScaler
-✔ Step 3: Create 100-day sliding windows
-✔ Step 4: Feed into LSTM model
-✔ Step 5: Inverse-transform predictions
-✔ Step 6: Compare Actual vs Predicted
-✔ Step 7: Show trend insight
-📂 Features Explanation (Mapped to Tabs)
-📊 Overview Tab
+📈 How Predictions Work
 
-Candlestick chart
+Load historical closing prices
 
-Volume chart
+Apply MinMax scaling
 
-Recent data table
+Create 100-step sliding windows
 
-💹 EMA Tab
+Feed sequences into LSTM
 
-EMA20
+Generate next-day prediction
 
-EMA50
+Inverse transform values
 
-EMA100
+Classify trend
 
-EMA200
+🚀 Future Enhancements
 
-🤖 Predictions Tab
+Multi-feature LSTM (OHLC + Volume + Indicators)
 
-Actual vs Predicted chart
+Sentiment analysis from financial news
 
-Trend %
+Pattern detection using CNN
 
-LSTM inference
+Live intraday predictions
 
-📈 Insights Tab
+Backtesting module for strategy evaluation
 
-Uptrend / Downtrend / Neutral highlight
-
-Future planned features:
-
-Sentiment analysis
-
-News & risk scoring
-
-📄 Downloadable Dataset
-
-Users can export the final processed dataset including:
-
-Date
-
-OHLC values
-
-EMAs
-
-Volume
-
-Prediction data
-
-🧪 Future Enhancements
-
-Sentiment analysis using NLP
-
-News-based trend scoring
-
-Multi-stock comparison
-
-Multi-feature ML models
-
-Live intraday updates
-
-Alerts & notifications
-
-🏁 Conclusion
-
-This project combines finance, machine learning, and interactive UI design to create a smart stock trend analysis tool. It serves as:
-
-A practical learning project
-
-A portfolio-ready ML application
-
-A strong demonstration of full-stack Python + ML skills
+Multi-stock comparison dashboard
 
 👨‍💻 Author
 
 Shivam Kumar Shukla
 Python Developer • ML Enthusiast • Full-Stack Learner
 
-⭐ Support the Project
+⭐ Support
 
-If you like this project, don’t forget to ⭐️ star the repo!
+If this project helps you, consider giving it a star on GitHub!
